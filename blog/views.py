@@ -1,10 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+import random
 
 def index(request):
 
-    photo_list = {}
-    return HttpResponse(photo_list)
+    photo_path_list = ["./blog/images/Bloodhound.webp", "blog/images/Pathfinder.webp", "blog/images/Wraith.webp"]
+    photo_path = photo_path_list[random.randint(0, 2)]
+    return HttpResponse(photo_path)
 
 def rules(request):
     
