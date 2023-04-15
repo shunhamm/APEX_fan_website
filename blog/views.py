@@ -1,12 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-import random
+from blog import user_utils
 
 def index(request):
 
-    photo_path_list = ["./blog/images/Bloodhound.webp", "blog/images/Pathfinder.webp", "blog/images/Wraith.webp"]
-    photo_path = photo_path_list[random.randint(0, 2)]
-    return HttpResponse(photo_path)
+    character = user_utils.get_character_profile_at_random()
+    context = {'character': character}
+
+    return render(request, 'character_detail.html', context)
 
 def rules(request):
     
