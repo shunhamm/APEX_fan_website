@@ -1,23 +1,25 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from blog import user_utils
+from .models import Character
 
-def index(request):
+def random_character_detail(request):
 
     character = user_utils.get_character_profile_at_random()
     context = {'character': character}
 
     return render(request, 'character_detail.html', context)
 
-def rules(request):
-    
-    game_rule = ""
-    return HttpResponse(game_rule)
+def character_detail(request, character_name):
 
-def notables_detail(request):
+    try:
+        character = Character.objects.get(name=character_name)
+    except Character.DoesNotExist:
+        raise Http404("Character dose not exist")
 
-    legend_list = {}    
-    return HttpResponse(legend_list)
+    context = {'character': character}
+
+    return render(request, 'character_detail.html', context)
 
 def notables_list(request):
 
