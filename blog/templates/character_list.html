@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Character List{% endblock %}
+
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <ui>
+    {% for character in characters %}
+        <li>
+            <div class="character">
+                <a href="{% url 'character_detail' character.name %}"> {{ character.name }} </a> 
+                <img src="{% static character.image_path %}" alt="{{ character.name }}">
+            </div>
+        </li>
+    {% empty %}
+        <li>No players found.</li>
+    {% endfor %}
+    </ui>
+{% endblock %}

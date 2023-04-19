@@ -21,10 +21,17 @@ def character_detail(request, character_name):
 
     return render(request, 'character_detail.html', context)
 
-def notables_list(request):
+def character_list(request):
 
-    legend_list = {}
-    return HttpResponse(legend_list)
+    try:
+        characters = Character.objects.all()
+        print(type(characters))
+    except:
+        raise Http404("Character dose not exist")
+    
+    context = {'characters': characters}
+
+    return render(request, 'character_list.html', context)
 
 def external_links(request):
 
