@@ -2,7 +2,8 @@ img {
     width: 30%;
 }
 
-.character {
+.item {
     display: flex;
     flex-direction: column;
+    background-color: yellow;
 }

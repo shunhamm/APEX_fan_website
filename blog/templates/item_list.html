@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Character List{% endblock %}
+
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <ui>
+    {% for item in items %}
+        <li>
+                {% if item.url %}
+                        <a href="{{ item.url }}" target="_blank">{{ item.name }}</a>
+                        <img src="{{ item.image_url }}" alt="{{ item.name }}">
+                {% else %}
+                    <a href="{% url 'character_detail' item.name %}">{{ item.name }}</a>
+                    <img src="{% static item.image_path %}" alt="{{ item.name }}">
+                {% endif %}
+            </div>
+        </li>
+    {% empty %}
+        <li>No Items found.</li>
+    {% endfor %}
+    </ui>
+{% endblock %}

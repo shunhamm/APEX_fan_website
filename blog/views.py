@@ -1,11 +1,12 @@
-from django.shortcuts import render
-from django.http import HttpResponse, Http404
-from blog import user_utils
-from .models import Character
+from django.shortcuts import render, redirect
+from urllib.parse import urljoin
+from django.http import Http404
+from blog import utils
+from .models import Character, ExternalLink
 
 def random_character_detail(request):
 
-    character = user_utils.get_character_profile_at_random()
+    character = utils.get_character_profile_at_random()
     context = {'character': character}
 
     return render(request, 'character_detail.html', context)
@@ -29,11 +30,18 @@ def character_list(request):
     except:
         raise Http404("Character dose not exist")
     
-    context = {'characters': characters}
+    context = {'items': characters}
 
-    return render(request, 'character_list.html', context)
+    return render(request, 'item_list.html', context)
 
 def external_links(request):
+    
+    try:
+        external_links = ExternalLink.objects.all()
+    except:
+        raise Http404("External Link dose not exist")
 
-    recommend_external_website = {}
-    return HttpResponse(recommend_external_website)
+    external_links = utils.add_image_url(external_links)
+    context = {'items': external_links}
+
+    return render(request, 'item_list.html', context)
