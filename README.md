@@ -1,4 +1,7 @@
-# Game Fan Website
+# APEX Fan Website
 
-- My first django project
-- This website provide some game contents
+- This website provides some character profiles and show useful websites for you.
+
+### Put the below URLs
+
+---
